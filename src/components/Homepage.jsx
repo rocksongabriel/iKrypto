@@ -9,7 +9,7 @@ import { Cryptocurrencies, News } from "./index";
 const { Title } = Typography;
 
 function Homepage() {
-  const { data, isFetching } = useGetCryptosQuery();
+  const { data, isFetching } = useGetCryptosQuery(10);
 
   const globalStats = data?.data?.stats;
 
@@ -17,7 +17,7 @@ function Homepage() {
 
   return (
     <>
-      <Title level={6} className="heading">
+      <Title level={1} className="heading">
         Krypto Stats Around the Globe
       </Title>
       <Row>
@@ -58,7 +58,7 @@ function Homepage() {
           <Link to="/cryptocurrencies">show more</Link>
         </Title>
       </div>
-      <Cryptocurrencies simplefied />
+      <Cryptocurrencies simplified />
 
       <div className="home-heading-container">
         <Title level={2} className="home-title">
@@ -68,7 +68,7 @@ function Homepage() {
           <Link to="/cryptocurrencies">show more</Link>
         </Title>
       </div>
-      <News simplefied />
+      <News simplified />
     </>
   );
 }

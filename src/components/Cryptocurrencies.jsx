@@ -5,16 +5,29 @@ import { Card, Row, Col, Input } from "antd";
 
 import { useGetCryptosQuery } from "../services/cryptoApi";
 
-function Cryptocurrencies() {
-  const { data: cryptosList, isFetching } = useGetCryptosQuery();
+function Cryptocurrencies({ simplified }) {
+  const count = simplified ? 10 : 100;
+  const { data: cryptosList, isFetching } = useGetCryptosQuery(count);
 
   const [cryptos, setCryptos] = useState(cryptosList?.data?.coins);
 
+  if (isFetching) return "Loading ...";
+
+  console.log(cryptos);
+  console.log(cryptosList)
+
+  // BUG - the cryptos is returning undefined on Firefox
   return (
     <>
       <Row gutter={[32, 32]}>
-        {cryptos.map((currency) => (
-          <Col xs={24} sm={12} lg={6} className="crypto-card" key={currency.id}>
+        {cryptos?.map((currency) => (
+          <Col
+            xs={24}
+            sm={12}
+            lg={6}
+            className="crypto-card"
+            key={currency.uuid}
+          >
             <Link to={`/crypto/${currency.id}`}>
               <Card
                 title={`${currency.rank}. ${currency.name}`}
