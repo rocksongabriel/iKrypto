@@ -20,13 +20,15 @@ const App = () => {
           <Navbar />
         </div>
         <div className="main">
-          <Routes>
-            <Route path="/" element={<Homepage />} />
-            <Route path="/exchanges" element={<Exchanges />} />
-            <Route path="/cryptocurrencies" element={<Cryptocurrencies />} />
-            <Route path="/crypto/:coinId" element={<CryptoDetails />} />
-            <Route path="/news" element={<News />} />
-          </Routes>
+          <div style={{padding: "10px 20px", backgroundColor: "whitesmoke"}}>
+            <Routes>
+              <Route path="/" element={<Homepage />} />
+              <Route path="/exchanges" element={<Exchanges />} />
+              <Route path="/cryptocurrencies" element={<Cryptocurrencies />} />
+              <Route path="/crypto/:coinId" element={<CryptoDetails />} />
+              <Route path="/news" element={<News />} />
+            </Routes>
+          </div>
 
           <div className="footer">
             <Typography.Title
