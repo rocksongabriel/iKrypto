@@ -1,7 +1,14 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Link } from "react-router-dom";
 import { Layout, Typography, Space } from "antd";
-import { Navbar, Homepage, Cryptocurrencies, Exchanges, CryptoDetails, News } from "./components";
+import {
+  Navbar,
+  Homepage,
+  Cryptocurrencies,
+  Exchanges,
+  CryptoDetails,
+  News,
+} from "./components";
 
 import "./App.css";
 
@@ -20,8 +27,23 @@ const App = () => {
             <Route path="/crypto/:coinId" element={<CryptoDetails />} />
             <Route path="/news" element={<News />} />
           </Routes>
+
+          <div className="footer">
+            <Typography.Title
+              level={5}
+              style={{ color: "white", textAlign: "center" }}
+            >
+              iKrypto <br />
+              All rights reserved
+            </Typography.Title>
+            <Space>
+              <Link to="/">Home</Link>
+              <Link to="/cryptocurrencies">Cryptocurrencies</Link>
+              <Link to="/exchanges">Exchanges</Link>
+              <Link to="/news">News</Link>
+            </Space>
+          </div>
         </div>
-        <div className="footer"></div>
       </div>
     </>
   );
