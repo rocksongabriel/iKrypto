@@ -20,7 +20,7 @@ const App = () => {
           <Navbar />
         </div>
         <div className="main">
-          <div style={{padding: "10px 20px", backgroundColor: "whitesmoke"}}>
+          <div style={{padding: "10px 20px 40px 10px", backgroundColor: "whitesmoke"}}>
             <Routes>
               <Route path="/" element={<Homepage />} />
               <Route path="/exchanges" element={<Exchanges />} />
