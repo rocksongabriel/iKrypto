@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import millify from "millify";
 import { Link } from "react-router-dom";
 import { Card, Row, Col, Input } from "antd";
@@ -9,14 +9,15 @@ function Cryptocurrencies({ simplified }) {
   const count = simplified ? 10 : 100;
   const { data: cryptosList, isFetching } = useGetCryptosQuery(count);
 
-  const [cryptos, setCryptos] = useState(cryptosList?.data?.coins);
+  const [cryptos, setCryptos] = useState();
+
+  useEffect(() => {
+    setCryptos(cryptosList?.data?.coins)
+  }, [cryptosList])
+  
 
   if (isFetching) return "Loading ...";
 
-  console.log(cryptos);
-  console.log(cryptosList)
-
-  // BUG - the cryptos is returning undefined on Firefox
   return (
     <>
       <Row gutter={[32, 32]}>
