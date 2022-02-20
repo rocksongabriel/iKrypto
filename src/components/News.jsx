@@ -56,6 +56,7 @@ function News({ simplified }) {
                   {news.name}
                 </Title>
                 <img
+                  style={{maxWidth: "100px", maxHeight: "100px"}}
                   src={news?.image?.thumbnail?.contentUrl || demoImage}
                   alt={news.name}
                 />
