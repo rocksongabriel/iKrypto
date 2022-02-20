@@ -65,7 +65,7 @@ function Homepage() {
           Latest Krypto News In The World
         </Title>
         <Title level={3} className="show-more">
-          <Link to="/cryptocurrencies">show more</Link>
+          <Link to="/news">show more</Link>
         </Title>
       </div>
       <News simplified />
