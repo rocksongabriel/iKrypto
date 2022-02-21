@@ -1,7 +1,7 @@
 import React from "react";
 
 function Exchanges() {
-  return <div>Exchanges</div>;
+  return <div>Exchanges - Coming soon</div>;
 }
 
 export default Exchanges;

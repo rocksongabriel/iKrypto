@@ -5,6 +5,8 @@ import moment from "moment";
 import { useGetCryptoNewsQuery } from "../services/cryptoNewsApi";
 import { useGetCryptosQuery } from "../services/cryptoApi";
 
+import Loader from "./Loader";
+
 const { Text, Title } = Typography;
 const { Option } = Select;
 
@@ -24,7 +26,7 @@ function News({ simplified }) {
     setCoins(cryptosList);
   }, [cryptosList]);
 
-  if (isFetching) return "Loading ...";
+  if (isFetching) return <Loader />;
 
   return (
     <Row gutter={[24, 24]}>
@@ -42,7 +44,9 @@ function News({ simplified }) {
           >
             <Option value="Cryptocurrency">Cryptocurrency</Option>
             {coins?.data?.coins.map((coin) => (
-              <Option key={coin.uuid} value={coin.name}>{coin.name}</Option>
+              <Option key={coin.uuid} value={coin.name}>
+                {coin.name}
+              </Option>
             ))}
           </Select>
         </Col>
@@ -56,7 +60,7 @@ function News({ simplified }) {
                   {news.name}
                 </Title>
                 <img
-                  style={{maxWidth: "100px", maxHeight: "100px"}}
+                  style={{ maxWidth: "100px", maxHeight: "100px" }}
                   src={news?.image?.thumbnail?.contentUrl || demoImage}
                   alt={news.name}
                 />

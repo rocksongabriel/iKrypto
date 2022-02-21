@@ -19,6 +19,7 @@ import {
   useGetCryptoHistoryQuery,
 } from "../services/cryptoApi";
 import LineChart from "./LineChart";
+import Loader from "./Loader";
 
 const { Text, Title } = Typography;
 const { Option } = Select;
@@ -27,7 +28,10 @@ function CryptoDetails() {
   const { coinId } = useParams();
   const [timePeriod, setTimePeriod] = useState("7d");
   const { data, isFetching } = useGetCryptoDetailsQuery(coinId);
-  const {data: coinHistory} = useGetCryptoHistoryQuery({timePeriod, coinId})
+  const { data: coinHistory } = useGetCryptoHistoryQuery({
+    timePeriod,
+    coinId,
+  });
   const [cryptoDetails, setCryptoDetails] = useState(data?.data?.coin);
 
   useEffect(() => {
@@ -101,7 +105,7 @@ function CryptoDetails() {
       icon: <ExclamationCircleOutlined />,
     },
   ];
-  if (isFetching) return "Loading data ...";
+  if (isFetching) return <Loader />;
   return (
     <>
       {cryptoDetails && (
@@ -185,7 +189,10 @@ function CryptoDetails() {
                 {cryptoDetails.name} Links
               </Title>
               {cryptoDetails.links.map((link, idx) => (
-                <Row className="coin-link" key={`${link.name}_${link.type}_${idx}`}>
+                <Row
+                  className="coin-link"
+                  key={`${link.name}_${link.type}_${idx}`}
+                >
                   <Title level={4} className="link-name">
                     {link.type}
                   </Title>
