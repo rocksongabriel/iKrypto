@@ -13,11 +13,14 @@ import icon from "../images/image-1.png";
 
 function Navbar() {
   const [activeMenu, setActiveMenu] = useState(true);
-  const [screenWidth, setScreenWidth] = useState(null);
-
+  const [screenWidth, setScreenWidth] = useState();
+  
   useEffect(() => {
     const handleResize = () => setScreenWidth(window.innerWidth);
     window.addEventListener("resize", handleResize);
+    
+    handleResize()
+
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
