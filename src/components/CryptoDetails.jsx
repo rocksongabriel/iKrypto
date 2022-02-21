@@ -14,7 +14,11 @@ import {
   NumberOutlined,
   ThunderboltOutlined,
 } from "@ant-design/icons";
-import { useGetCryptoDetailsQuery } from "../services/cryptoApi";
+import {
+  useGetCryptoDetailsQuery,
+  useGetCryptoHistoryQuery,
+} from "../services/cryptoApi";
+import LineChart from "./LineChart";
 
 const { Text, Title } = Typography;
 const { Option } = Select;
@@ -23,6 +27,7 @@ function CryptoDetails() {
   const { coinId } = useParams();
   const [timePeriod, setTimePeriod] = useState("7d");
   const { data, isFetching } = useGetCryptoDetailsQuery(coinId);
+  const {data: coinHistory} = useGetCryptoHistoryQuery({timePeriod, coinId})
   const [cryptoDetails, setCryptoDetails] = useState(data?.data?.coin);
 
   useEffect(() => {
@@ -120,7 +125,11 @@ function CryptoDetails() {
               <Option key={date}>{date}</Option>
             ))}
           </Select>
-          {/* Line chart */}
+          <LineChart
+            coinHistory={coinHistory}
+            currentPrice={millify(cryptoDetails.price)}
+            coinName={cryptoDetails.name}
+          />
           <Col className="stats-container">
             <Col className="coin-value-statistics">
               <Col className="coin-value-statistic-heading">
@@ -175,8 +184,8 @@ function CryptoDetails() {
               <Title level={3} className="coin-details-heading">
                 {cryptoDetails.name} Links
               </Title>
-              {cryptoDetails.links.map((link) => (
-                <Row className="coin-link" key={link.name}>
+              {cryptoDetails.links.map((link, idx) => (
+                <Row className="coin-link" key={`${link.name}_${link.type}_${idx}`}>
                   <Title level={4} className="link-name">
                     {link.type}
                   </Title>
